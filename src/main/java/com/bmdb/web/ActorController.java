@@ -1,5 +1,6 @@
 package com.bmdb.web;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bmdb.business.Actor;
@@ -34,7 +36,7 @@ public class ActorController {
 	
 	//GET ALL Actors
 	@GetMapping("/")
-	public List <Actor> getAll() {
+	public List <Actor> getAllActors() {
 		return actorRepo.findAll();
 		
 	}
@@ -71,5 +73,32 @@ public Actor addMovie(@RequestBody Actor a) {
 		}
 		return a.get();
 	}
+	//LIST ALL Actors by Gender
+	//Using RequestParam to pass Gender
+		@GetMapping("/find-by-gender")
+		public List <Actor> getAllActors(@RequestParam String gender) {
+			return actorRepo.findByGender(gender);
+		}			
+		//LIST ALL Actors by lastName
+		//Using RequestParam to pass lastName
+			@GetMapping("/find-by-lastname")
+			public List <Actor> getAll(@RequestParam String lastName) {
+				return actorRepo.findByLastName(lastName);
+}
+			//LIST ALL Actors whose last name starts with "letter"
+			//Using RequestParam to pass first letter of last name
+				@GetMapping("/find-by-lastname-starts-with")
+				public List <Actor> getActorsLastNameStarts(@RequestParam String letter) {
+					return actorRepo.findByLastNameLike(letter + "%");
+	}
+				//LIST all actors born between d1 and d2
+				@GetMapping("/find-by-birthdate-between")
+				public List <Actor> getActorsByBirthDateBetween(@RequestParam String d1, @RequestParam String d2) {
+					LocalDate ld1 = LocalDate.parse(d1);
+					LocalDate ld2 = LocalDate.parse(d2);
+				
+					return actorRepo.findByBirthDateBetween(ld1, ld2);
+				}
+				
 }
 
