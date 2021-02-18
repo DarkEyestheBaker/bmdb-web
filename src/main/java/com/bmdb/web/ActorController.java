@@ -84,10 +84,11 @@ public class ActorController {
 				throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
 						"Exception caught during Actor delete.");
 			}
-		} else {
+		} 
+			else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Actor not found.");
 		}
-		return a;
+		return a.get();
 	}
 
 	// LIST ALL Actors by Gender
