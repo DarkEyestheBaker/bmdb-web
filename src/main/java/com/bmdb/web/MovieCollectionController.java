@@ -27,7 +27,7 @@ import com.bmdb.db.*;
 		 * 3) POST - Insert
 		 * 4) PUT - Update
 		 * 5) DELETE - delete
-	*/
+		 */
 		@Autowired       // Wires database to your controller
 		private MovieCollectionRepo movieCollectionRepo;
 		

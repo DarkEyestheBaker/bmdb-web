@@ -65,6 +65,7 @@ public Movie addMovie(@RequestBody Movie m) {
 		Optional<Movie> m = movieRepo.findById(id);
 		// isPresent will return true if a movie was found
 		if (m.isPresent()) {
+			//send msg back to front end
 		movieRepo.deleteById(id);
 		} else {
 			System.out.println("Error - movie not found for id " + id);

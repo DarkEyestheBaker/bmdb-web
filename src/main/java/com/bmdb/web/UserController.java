@@ -32,7 +32,6 @@ package com.bmdb.web;
 	*/
 		@Autowired       // Wires database to your controller
 		private UserRepo userRepo;
-		
 		//GET ALL Users
 		@GetMapping("/")
 		public List <User> getAll() {
@@ -71,6 +70,11 @@ package com.bmdb.web;
 				System.out.println("Error - user not found for id " + id);
 			}
 			return u.get();
+		}
+		//Login
+		@PostMapping("/login")
+		public Optional <User> login(@RequestBody User user) {
+			return userRepo.findByUsernameAndPassword(user.getUsername(), user.getPassword());
 		}
 	}
 
